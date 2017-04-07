@@ -30,6 +30,11 @@ app.config(function($routeProvider) {
         .when('/three', {
             templateUrl : '/templates/placeHolder.html',
             controller  : 'mainController'
+        })
+
+        .when('/details', {
+            templateUrl : '/templates/details.html',
+            controller  : 'detailsController'
         });
 });
 
