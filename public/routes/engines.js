@@ -4,7 +4,7 @@ var request 		= require('request');
  * @author Kyle Duckworth (212326570)
  * @version 01.02.2017
  */
-exports.getTags = function(req, res){
+exports.getEngines = function(req, res){
 	// Time series URL to query datapoints
   var timeseries_query_uri = 'https://time-series-store-predix.run.aws-usw02-pr.ice.predix.io/v1/tags';
 	

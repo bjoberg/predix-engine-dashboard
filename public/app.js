@@ -75,7 +75,6 @@ app.controller('mainController', function($scope, $http) {
 });
 
 app.controller('detailsController', function($scope, $http) {  
-    console.log("in details controller");
 	var token;
 	$scope.token = null;
     $scope.loadTagData = loadTagData;
@@ -89,6 +88,16 @@ app.controller('detailsController', function($scope, $http) {
         .error(function(data) {
             console.log('Error: ' + data);
         });
+
+    function loadEngineDataBasedOnSelected(tag) {
+        $http.get('/api/' + tag + '/engines/', + $scope.toke)
+            .success(function(data) {
+                console.log(data);
+            })
+            .error(function(data) {
+                console.log('Error: ' + data);
+            })
+    }
 
     function loadTagData() {
         // Add the auth token as a parameter for a time-series request
