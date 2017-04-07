@@ -8,6 +8,7 @@ var app = express();
 
 app.use(express.static(__dirname + '/public'));
 app.use("/public", express.static(__dirname + '/public'));
+app.use('/bower_components',  express.static(__dirname + '/bower_components'));
 
 app.get('/', function (req, res) {
     res.sendFile(__dirname + "/public/" + "index.html");

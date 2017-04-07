@@ -2,6 +2,7 @@
   "name": "Predix Engine Dashboard",
   "description": "GE Healthcare Hackathon 2017",
   "main": "server.js",
+  "directory": "./bower_components",
   "authors": [
     "Brett Oberg"
   ],
