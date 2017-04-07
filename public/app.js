@@ -1,7 +1,6 @@
 
 var app = angular.module('predixHackathon', ['ngRoute']);
 
-
 app.config(function($routeProvider) {
     $routeProvider
 
@@ -36,13 +35,6 @@ app.config(function($routeProvider) {
             templateUrl : '/templates/details.html',
             controller  : 'detailsController'
         });
-});
-
-app.controller('sampleController', function($scope, $http) {
-
-    //controller code goes here
-
-//end controller
 });
 
 app.controller('mainController', function($scope, $http) {
@@ -82,3 +74,30 @@ app.controller('mainController', function($scope, $http) {
 //end controller
 });
 
+app.controller('detailsController', function($scope, $http) {  
+    console.log("in details controller");
+	var token;
+	$scope.token = null;
+    $scope.loadTagData = loadTagData;
+	$http.get('/api/auth/')
+	    .success(function(data) {
+            // Store the auth token to be used for time-series requests
+            token = data;   
+            $scope.token=token;
+            loadTagData();
+        })
+        .error(function(data) {
+            console.log('Error: ' + data);
+        });
+
+    function loadTagData() {
+        // Add the auth token as a parameter for a time-series request
+        $http.get('/api/tags/' + $scope.token)
+            .success(function(data) {
+                console.log(data);
+            })
+            .error(function(data) {
+                console.log('Error: ' + data);
+            });   
+    }
+});
