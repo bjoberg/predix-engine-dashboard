@@ -22,6 +22,7 @@
     "px-vis-timeseries": "^1.1.1",
     "px-simple-line-chart": "^1.7.8",
     "px-rangepicker": "^1.3.10",
-    "px-datetime-field": "^0.6.14"
+    "px-datetime-field": "^0.6.14",
+    "px-spinner": "^1.0.0"
   }
 }

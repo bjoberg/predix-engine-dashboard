@@ -5,6 +5,7 @@
         <h1>{{tag}} Timeseries Report</h1>
         <br/>
         <h4>1. Which engines would you like to compare?</h4>
+        <px-spinner ng-show="showEngineSpinner" size="50"></px-spinner>
         <form>
           <div class="col-sm-12 col-md-6 col-lg-4" ng-repeat="i in engines">
             <label class="checkbox-inline"><input type="checkbox" value="" ng-click="getEngineData(tag, i.engine)" ng-model="i.selected">{{i.engine}}</label>
@@ -13,21 +14,13 @@
       </div>
     </div>
   </div>
-  <!--<div class="row">
-    <br/>
-    <h4>2. Select a date range.</h4>
-    <br/>
-    <div class="col-sm-12 col-md-12 col-lg-12">
-      <p>{{tsdDateTime}}</p>
-      <px-datetime-field show-buttons="true" block-future-dates="true" date-format="YYYY/MM/DD" time-format="hh:mm:ss A" time-zone="UTC" show-time-zone="text" date-time="tsdDateTime"></px-datetime-field>
-    </div>   
-  </div>-->
   <div class="row">  
     <br/>
-    <h4>2. Compare using these timeseries graphs.</h4>
+    <h4>2. Compare using the following timeseries graphs. <span class="badge" ng-show="badgeCount>0" ng-model="badgeCount">{{badgeCount}}</span></h4>
     <br/>
     <div class="col-sm-12 col-md-12 col-lg-12">
       <p>Aggregate of all engines.</p>
+      <px-spinner ng-show="showGraphSpinner" size="50"></px-spinner>
       <px-vis-timeseries 
         class="ts-chart" 
         id="ts" 
@@ -51,8 +44,7 @@
     <div class="col-sm-12 col-md-12 col-lg-12" ng-repeat="i in engines">
       <div ng-show="i.selected">
         <br/>
-        <p>{{i.engine}}</p>
-        <br/>
+        <h5>{{i.engine}}</h5>
         <px-vis-timeseries 
           class="ts-chart" 
           id="ts" 
