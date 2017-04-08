@@ -3,6 +3,7 @@ var request = require('request');
     kpi = require('./public/routes/kpi');
 	auth = require('./public/routes/auth');
     tags = require('./public/routes/tags');
+    engine = require('./public/routes/engine');
 var app = express();
 
 app.use(express.static(__dirname + '/public'));
@@ -15,6 +16,9 @@ app.get('/', function (req, res) {
 
 // KPI routes
 app.get('/api/kpi/:kpiName/:token', kpi.getKpi);
+
+// Engine routes
+app.get('/api/kpi/:kpiName/engine/:token', engine.getEngine);
 
 // Auth route
 app.get('/api/auth/', auth.authenticate);

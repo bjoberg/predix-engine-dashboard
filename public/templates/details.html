@@ -4,36 +4,72 @@
       <div class="row">
         <h1>{{tag}} Timeseries Report</h1>
         <br/>
-        <h4>Please select engines to compare.</h4>
+        <h4>1. Which engines would you like to compare?</h4>
         <form>
           <div class="col-sm-12 col-md-6 col-lg-4" ng-repeat="i in engines">
-            <label class="checkbox-inline"><input type="checkbox" value="">{{i}}</label>
+            <label class="checkbox-inline"><input type="checkbox" value="" ng-click="getEngineData(tag, i.engine)" ng-model="i.selected">{{i.engine}}</label>
           </div>
         </form>
       </div>
     </div>
   </div>
-  <div class="row">
+  <!--<div class="row">
     <br/>
-    <h4>Compare using this timeseries graph.</h4>
+    <h4>2. Select a date range.</h4>
+    <br/>
     <div class="col-sm-12 col-md-12 col-lg-12">
-      </div>
-        <px-vis-timeseries
-          class="ts-chart"
+      <p>{{tsdDateTime}}</p>
+      <px-datetime-field show-buttons="true" block-future-dates="true" date-format="YYYY/MM/DD" time-format="hh:mm:ss A" time-zone="UTC" show-time-zone="text" date-time="tsdDateTime"></px-datetime-field>
+    </div>   
+  </div>-->
+  <div class="row">  
+    <br/>
+    <h4>2. Compare using these timeseries graphs.</h4>
+    <br/>
+    <div class="col-sm-12 col-md-12 col-lg-12">
+      <p>Aggregate of all engines.</p>
+      <px-vis-timeseries 
+        class="ts-chart" 
+        id="ts" 
+        prevent-resize 
+        width = "950" 
+        height = "500" 
+        register-location="side" 
+        chart-horizontal-alignment="center" 
+        chart-vertical-alignment="center" 
+        margin='{"top":30,"bottom":60,"left":65,"right":65}' 
+        enable-tooltip="true" 
+        tooltip 
+        include-all-series 
+        selection-type="xAxis" 
+        chart-data='{{tsDataValues}}' 
+        x-axis-config='{"title": "Date"}' 
+        y-axis-config='{"title": {"value"}}'>
+    </div>
+  </div>
+  <div class="row">  
+    <div class="col-sm-12 col-md-12 col-lg-12" ng-repeat="i in engines">
+      <div ng-show="i.selected">
+        <br/>
+        <p>{{i.engine}}</p>
+        <br/>
+        <px-vis-timeseries 
+          class="ts-chart" 
           id="ts" 
-          prevent-resize width = "950" 
+          prevent-resize 
+          width = "950" 
           height = "500" 
           register-location="side" 
-          chart-horizontal-alignment="center"
-          chart-vertical-alignment="center"
-          margin='{"top":30,"bottom":60,"left":65,"right":65}'
+          chart-horizontal-alignment="center" 
+          chart-vertical-alignment="center" 
+          margin='{"top":30,"bottom":60,"left":65,"right":65}' 
           enable-tooltip="true" 
           tooltip 
           include-all-series 
           selection-type="xAxis" 
-          chart-data='{{tsDataValues}}' 
+          chart-data='{{i.data}}' 
           x-axis-config='{"title": "Date"}' 
-          y-axis-config='{"title": "value"}'>
+          y-axis-config='{"title": {"value"}}'>
       </div>
     </div>
   </div>
