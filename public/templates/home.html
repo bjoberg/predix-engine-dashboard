@@ -1,30 +1,3 @@
 <div>
-  <!--<li ng-repeat="i in dataValues"><a>{{i}}</a></li>-->
-  <!--<div>{{dataValues}}</div>-->
-  <!--<px-simple-line-chart line-data="[['2017-04-08T02:38:40.037Z',1198],['2017-04-08T02:38:40.037Z',1192]]" columns="7" rows="7"></px-simple-line-chart>-->
-  <px-vis-data-converter
-          data-key = "series"
-          id-key = "id"
-          name-key="name"
-          original-data = "[[tsData]]"
-          series-config="{{seriesConfig}}"
-          chart-data="{{tsChartData}}">
-        </px-vis-data-converter>	
-        
-        <br />
-        <h2 id="title_tag" >Timeseries - Chart</h2>
-        <px-vis-timeseries
-          prevent-resize
-          width = "1200"
-          height = "800"
-          include-all-series
-          render-to-canvas
-          selection-type= "xy"
-          chart-data="{{dataValues}}"
-          x-axis-config='{
-            "title": "Date"
-          }'
-          y-axis-config="[[yLabel]]">
-          disable-navigator>
-        </px-vis-timeseries>
+  <li ng-repeat="i in tags"><a href="#/details/{{i}}">{{i}}</a></li>
 </div>
