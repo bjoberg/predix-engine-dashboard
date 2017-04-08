@@ -3,6 +3,10 @@ var app = angular.module('predixHackathon', ['ngRoute']);
 app.config(function($routeProvider) {
     $routeProvider
         .when('/', {
+            templateUrl : '/templates/AboutUs.html',
+            controller  : 'AboutController'
+        })
+        .when('/', {
             templateUrl : '/templates/home.html',
             controller  : 'homeController'   
         })
@@ -10,6 +14,10 @@ app.config(function($routeProvider) {
             templateUrl : '/templates/details.html',
             controller : 'detailsController'
         });
+});
+
+app.controller('AboutController', function($scope, $http){
+    console.log('Test');
 });
 
 app.controller('detailsController', function($scope, $http, $routeParams) {
