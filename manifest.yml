@@ -1,4 +1,4 @@
 applications:
-- name: nodeappHackathon
+- name: predix-engine-dashboard
   command: node server.js
   memory: 512MB
