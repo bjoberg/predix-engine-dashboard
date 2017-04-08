@@ -26,5 +26,5 @@ app.get('/api/auth/', auth.authenticate);
 // Tags route
 app.get('/api/tags/:token', tags.getTags);
 
-app.listen(process.env.PORT || 8002);
+app.listen(process.env.PORT || 8000);
 console.log("App listening on port 8000");
