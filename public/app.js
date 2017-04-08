@@ -4,10 +4,10 @@ var app = angular.module('predixHackathon', ['ngRoute']);
 
 app.config(function($routeProvider) {
     $routeProvider
-        // .when('/', {
-        //     templateUrl : '/templates/home.html',
-        //     controller  : 'homeController'
-        // })
+        .when('/', {
+            templateUrl : '/templates/AboutUs.html',
+            controller  : 'AboutController'
+        })
         
         .when('/', {
             templateUrl : '/templates/home.html',
@@ -16,7 +16,9 @@ app.config(function($routeProvider) {
 
 
 });
-
+app.controller('AboutController', function($scope, $http){
+console.log('Test');
+});
 app.controller('mainController', function($scope, $http) {
 	var token;
     $scope.loadKpiData = loadKpiData;
