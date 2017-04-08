@@ -37,10 +37,13 @@ app.controller('detailsController', function($scope, $http, $routeParams) {
     $scope.engines = null;
     $scope.tag = $routeParams.tag;
     $scope.badgeCount = 0;
+    $scope.showEngineSpinner = true;
+    $scope.showGraphSpinner = true;
 
     // Established authentication with the server
     $http.get('/api/auth/')
         .success(function(data) {
+
             $scope.token=data;
             loadKpiData($scope.tag);
         })
@@ -69,6 +72,7 @@ app.controller('detailsController', function($scope, $http, $routeParams) {
                 }
         });
         $scope.tsDataValues = JSON.parse(JSON.stringify(newValues));
+        $scope.showGraphSpinner = false;
     }
 
     // Initialize empty engine objects
@@ -81,6 +85,7 @@ app.controller('detailsController', function($scope, $http, $routeParams) {
                 }
         });
         $scope.engines = JSON.parse(JSON.stringify(newEngines)); 
+        $scope.showEngineSpinner = false;
     }
 
     // Get the tag data for a specific engine
@@ -151,6 +156,7 @@ app.controller('detailsController', function($scope, $http, $routeParams) {
 app.controller('homeController', function($scope, $http) {  
 	$scope.token = null;
     $scope.tags = null;
+    $scope.showTagSpinner = true;
 	$http.get('/api/auth/')
 	    .success(function(data) {
             $scope.token=data;
@@ -164,6 +170,7 @@ app.controller('homeController', function($scope, $http) {
         $http.get('/api/tags/' + $scope.token)
             .success(function(data) {
                 $scope.tags = data.results;
+                $scope.showTagSpinner = false;
             })
             .error(function(data) {
                 console.log('Error: ' + data);

@@ -4,6 +4,7 @@
   <h4>Please select a specific engine tag to review.</h4>
   </br>
   <div class="row">
+    <px-spinner ng-show="showTagSpinner" size="50"></px-spinner>
     <div class="col-sm-12 col-md-6 col-lg-4 tag-col" ng-repeat="i in tags">
       <li class="tags"><a href="#/details/{{i}}">{{i}}</a></li>
     </div>

@@ -5,6 +5,7 @@
         <h1>{{tag}} Timeseries Report</h1>
         <br/>
         <h4>1. Which engines would you like to compare?</h4>
+        <px-spinner ng-show="showEngineSpinner" size="50"></px-spinner>
         <form>
           <div class="col-sm-12 col-md-6 col-lg-4" ng-repeat="i in engines">
             <label class="checkbox-inline"><input type="checkbox" value="" ng-click="getEngineData(tag, i.engine)" ng-model="i.selected">{{i.engine}}</label>
@@ -19,6 +20,7 @@
     <br/>
     <div class="col-sm-12 col-md-12 col-lg-12">
       <p>Aggregate of all engines.</p>
+      <px-spinner ng-show="showGraphSpinner" size="50"></px-spinner>
       <px-vis-timeseries 
         class="ts-chart" 
         id="ts" 
