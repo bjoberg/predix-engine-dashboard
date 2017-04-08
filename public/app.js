@@ -25,6 +25,8 @@ app.controller('detailsController', function($scope, $http, $routeParams) {
     $scope.loadKpiData = loadKpiData;
     $scope.token = null;
     $scope.tsDataValues = null;
+    $scope.engines = null;
+    $scope.tag = $routeParams.tag;
     $http.get('/api/auth/')
         .success(function(data) {
             $scope.token=data;
@@ -37,7 +39,9 @@ app.controller('detailsController', function($scope, $http, $routeParams) {
     function loadKpiData(kpiName){
 		$http.get('/api/kpi/' + kpiName + '/' + $scope.token)
 			.success(function(data) {
+                $scope.engines = data.tags[0].results[0].attributes.AssetUri;
                 parseTsDataPoints(data.tags[0].results[0].values);
+                console.log(data.tags[0].results[0].attributes.AssetUri);
 			})
 			.error(function(data) {
 				console.log('Error: ' + data);
@@ -52,6 +56,10 @@ app.controller('detailsController', function($scope, $http, $routeParams) {
                 }
         });
         $scope.tsDataValues = JSON.parse(JSON.stringify(newValues));
+    }
+
+    function getEngines(data) {
+        console.log(data);
     }
 });
 

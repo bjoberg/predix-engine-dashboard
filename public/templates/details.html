@@ -1,14 +1,40 @@
 <div>
-  <px-vis-timeseries 
-    id="ts" 
-    prevent-resize width = "950" 
-    height = "500" 
-    register-location="side" 
-    enable-tooltip="true" 
-    tooltip 
-    include-all-series 
-    selection-type="xAxis" 
-    chart-data='{{tsDataValues}}' 
-    x-axis-config='{"title": "Date"}' 
-    y-axis-config='{"title": "value"}'>
+  <div class="row">
+    <div class="col-sm-12 col-md-12 col-lg-12">
+      <div class="row">
+        <h1>{{tag}} Timeseries Report</h1>
+        <br/>
+        <h4>Please select engines to compare.</h4>
+        <form>
+          <div class="col-sm-12 col-md-6 col-lg-4" ng-repeat="i in engines">
+            <label class="checkbox-inline"><input type="checkbox" value="">{{i}}</label>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <br/>
+    <h4>Compare using this timeseries graph.</h4>
+    <div class="col-sm-12 col-md-12 col-lg-12">
+      </div>
+        <px-vis-timeseries
+          class="ts-chart"
+          id="ts" 
+          prevent-resize width = "950" 
+          height = "500" 
+          register-location="side" 
+          chart-horizontal-alignment="center"
+          chart-vertical-alignment="center"
+          margin='{"top":30,"bottom":60,"left":65,"right":65}'
+          enable-tooltip="true" 
+          tooltip 
+          include-all-series 
+          selection-type="xAxis" 
+          chart-data='{{tsDataValues}}' 
+          x-axis-config='{"title": "Date"}' 
+          y-axis-config='{"title": "value"}'>
+      </div>
+    </div>
+  </div>
 </div>
