@@ -1,4 +1,5 @@
 
+
 var app = angular.module('predixHackathon', ['ngRoute']);
 
 app.config(function($routeProvider) {
@@ -7,33 +8,7 @@ app.config(function($routeProvider) {
         // route for the home page
         .when('/', {
             templateUrl : '/templates/home.html',
-            controller  : 'mainController'
-        })
-
-        // route for the ics page
-        .when('/learnMore', {
-            templateUrl : '/templates/learnMore.html',
-            controller  : 'mainController'
-        })
-
-        .when('/one', {
-            templateUrl : '/templates/placeHolder.html',
-            controller  : 'mainController'
-        })
-
-        .when('/two', {
-            templateUrl : '/templates/placeHolder.html',
-            controller  : 'mainController'
-        })
-
-        .when('/three', {
-            templateUrl : '/templates/placeHolder.html',
-            controller  : 'mainController'
-        })
-
-        .when('/details', {
-            templateUrl : '/templates/details.html',
-            controller  : 'detailsController'
+            controller  : 'homeController'
         });
 });
 
@@ -74,16 +49,12 @@ app.controller('mainController', function($scope, $http) {
 //end controller
 });
 
-app.controller('detailsController', function($scope, $http) {  
-	var token;
+app.controller('homeController', function($scope, $http) {  
 	$scope.token = null;
     $scope.tags = null;
-    $scope.loadTagData = loadTagData;
 	$http.get('/api/auth/')
 	    .success(function(data) {
-            // Store the auth token to be used for time-series requests
-            token = data;   
-            $scope.token=token;
+            $scope.token=data;
             loadTagData();
         })
         .error(function(data) {
@@ -91,11 +62,9 @@ app.controller('detailsController', function($scope, $http) {
         });
 
     function loadTagData() {
-        // Add the auth token as a parameter for a time-series request
         $http.get('/api/tags/' + $scope.token)
             .success(function(data) {
                 $scope.tags = data.results;
-                console.log(data.results);
             })
             .error(function(data) {
                 console.log('Error: ' + data);
