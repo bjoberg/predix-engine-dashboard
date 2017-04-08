@@ -1,3 +1,11 @@
 <div>
-  <li ng-repeat="i in tags"><a href="#/details/{{i}}">{{i}}</a></li>
+  <h1>Predix Engine Dashboard</h1>
+  <br/>
+  <h4>Please select a specific engine tag to review.</h4>
+  </br>
+  <div class="row">
+    <div class="col-sm-12 col-md-6 col-lg-4 tag-col" ng-repeat="i in tags">
+      <li class="tags"><a href="#/details/{{i}}">{{i}}</a></li>
+    </div>
+  </div>
 </div>
