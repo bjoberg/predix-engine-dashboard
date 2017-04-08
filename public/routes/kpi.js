@@ -17,7 +17,7 @@ exports.getKpi = function(req, res){
 			{
 				"name": req.params['kpiName'],
 				"order": "desc",
-				"limit": 2
+				"limit": 10000
 			}
 		]
 	};

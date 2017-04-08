@@ -4,12 +4,17 @@ var app = angular.module('predixHackathon', ['ngRoute']);
 
 app.config(function($routeProvider) {
     $routeProvider
-
-        // route for the home page
+        // .when('/', {
+        //     templateUrl : '/templates/home.html',
+        //     controller  : 'homeController'
+        // })
+        
         .when('/', {
             templateUrl : '/templates/home.html',
-            controller  : 'homeController'
+            controller  : 'mainController'   
         });
+
+
 });
 
 app.controller('mainController', function($scope, $http) {
@@ -37,6 +42,8 @@ app.controller('mainController', function($scope, $http) {
 		$http.get('/api/kpi/' + kpiName + '/' + $scope.token)
 
 			.success(function(data) {
+                validateDataPoints(data.tags[0].results[0].values);
+                $scope.engines = data.tags[0].results[0].attributes.AssetUri;
 			   console.log(data);
 			})
 			.error(function(data) {
@@ -46,6 +53,29 @@ app.controller('mainController', function($scope, $http) {
     //end function
     }
     
+    function validateDataPoints(data) {
+        console.log(data);
+        // var arrTwo = [];
+        // var newValues = data.map(function(value) {
+        //     var arrOne = [];
+        //     arrOne.push(value[0]);
+        //     arrOne.push(value[1]);
+        //     return arrTwo.push(arrOne);
+        // });
+        var newValues = data.map(function(value) {
+            return {
+                    x: value[0],
+                    y: "" + value[1]
+                }
+        });
+        console.log('newValues', newValues);
+        $scope.dataValues = JSON.parse(JSON.stringify(newValues));
+        // $scope.dataValues = JSON.parse('[{"x":1465416480000,"y":"0"},{"x":1465416540000,"y":"0.897277832"},{"x":1465416600000,"y":"1"},{"x":1465416660000,"y":"2"},{"x":1465416720000,"y":"1"},{"x":1465416780000,"y":"0.897697449"},{"x":1465416840000,"y":"0.897796631"}]');       
+        //[{"x":1465416480000,"y":"0"},{"x":1465416540000,"y":"0.897277832"},{"x":1465416600000,"y":"1"},{"x":1465416660000,"y":"2"},{"x":1465416720000,"y":"1"},{"x":1465416780000,"y":"0.897697449"},{"x":1465416840000,"y":"0.897796631"}]
+        //[{"x":1491620870028,"y":"1191"},{"x":1491620870028,"y":"1182"},{"x":1491620870028,"y":"1181"},{"x":1491620870028,"y":"1165"},{"x":1491620870028,"y":"1163"},{"x":1491620870028,"y":"1156"},{"x":1491620870028,"y":"1126"},{"x":1491620870028,"y":"1122"},{"x":1491620870028,"y":"1117"},{"x":1491620870028,"y":"1115"}]
+        // console.log('dataValues', $scope.dataValues);
+    }
+
 //end controller
 });
 
@@ -65,6 +95,7 @@ app.controller('homeController', function($scope, $http) {
         $http.get('/api/tags/' + $scope.token)
             .success(function(data) {
                 $scope.tags = data.results;
+                console.log(data.results);
             })
             .error(function(data) {
                 console.log('Error: ' + data);
